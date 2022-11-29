@@ -61,7 +61,7 @@ router.post(
         title: req.body.title,
         description: req.body.description,
         category: req.body.category,
-        image: process.env.URL + `/api/products/image/${req.image}`,
+        image: process.env.URL_VERCEL + `/api/products/image/${req.image}`,
         originalPrice: req.body.originalPrice,
         promotionPercent: req.body.promotionPercent,
         saled: req.body.saled,
