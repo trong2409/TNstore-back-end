@@ -61,7 +61,7 @@ export const storeImage = async (req, res, next) => {
   req.image = req.file.fieldname + "-" + Date.now() + "." + extend;
   fs.writeFile(rootDir + `/images/${req.image}`, req.file.buffer, (err) => {
     if (err) {
-      return res.status(500).json({ message: "Some things wrong" });
+      return res.status(500).json(err);
     } else {
       next();
     }
