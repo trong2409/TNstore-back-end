@@ -9,7 +9,7 @@ const categoriesSchema = new mongoose.Schema({
     type: Array,
     default: [],
   },
-  create_at: {
+  created_at: {
     type: Date,
     default: Date.now(),
   },

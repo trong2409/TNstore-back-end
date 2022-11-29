@@ -1,19 +1,17 @@
-import yup from "yup";
+import Joi from "joi";
 
-const schema = yup.object().shape({
-  name: yup.string().required(),
-  products: yup.array(),
+const schema = Joi.object({
+  name: Joi.string().required(),
+  products: Joi.array(),
 });
 
-export const inputValidate = (req, res, next) => {
-  schema
-    .isValid({
+export const inputValidate = async (req, res, next) => {
+  try {
+    const value = await schema.validateAsync({
       name: req.body.name,
-    })
-    .then((valid) => {
-      next();
-    })
-    .catch((err) => {
-      res.status(400).send(err.errors.name.message);
     });
+    next();
+  } catch (err) {
+    res.status(400).send(err.details[0].message);
+  }
 };
