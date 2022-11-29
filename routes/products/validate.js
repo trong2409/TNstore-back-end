@@ -59,11 +59,10 @@ export const storeImage = async (req, res, next) => {
     return res.status.json({ message: "Only images are allowed" });
   }
   req.image = req.file.fieldname + "-" + Date.now() + "." + extend;
-  fs.writeFile(`../../images/${req.image}`, req.file.buffer, (err) => {
+  fs.writeFileSync(rootDir + `/images/${req.image}`, req.file.buffer, (err) => {
     if (err) {
-      return res.status(500).json(err);
-    } else {
-      next();
+      return res.status(400).json(err);
     }
   });
+  next();
 };
